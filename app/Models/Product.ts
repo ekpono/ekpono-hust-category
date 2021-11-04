@@ -1,4 +1,3 @@
-import { DateTime } from 'luxon'
 import { BaseModel, belongsTo, column, BelongsTo } from '@ioc:Adonis/Lucid/Orm'
 import ProductCategory from './ProductCategory'
 import ProductSubCategory from './ProductSubCategory'
