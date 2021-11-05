@@ -19,7 +19,7 @@ const databaseConfig: DatabaseConfig = {
   | file.
   |
   */
-  connection: Env.get('DB_CONNECTION', 'mysql'),
+  connection: Env.get('DB_CONNECTION', 'sqlite'),
 
   connections: {
     /*
@@ -47,6 +47,32 @@ const databaseConfig: DatabaseConfig = {
       },
       healthCheck: false,
       debug: false,
+    },
+
+    pg: {
+      client: 'pg',
+      connection: {
+        host: Env.get('PG_HOST'),
+        port: Env.get('PG_PORT'),
+        user: Env.get('PG_USER'),
+        password: Env.get('PG_PASSWORD', ''),
+        database: Env.get('PG_DB_NAME'),
+      },
+      migrations: {
+        naturalSort: true,
+      },
+      healthCheck: false,
+      debug: false,
+    },
+
+    sqlite: {
+      client: 'sqlite3',
+      connection: {
+        filename: `database/${Env.get('DB_DATABASE', 'development')}.sqlite`
+        // filename: Helpers(`${Env.get('DB_DATABASE', 'development')}.sqlite`)
+      },
+      useNullAsDefault: true,
+      debug: Env.get('DB_DEBUG', false)
     },
 
   }
